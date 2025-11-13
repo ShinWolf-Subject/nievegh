@@ -1,0 +1,23 @@
+[build]
+  publish = "publicfiles"
+  command = "npm run build"
+
+# Blok akses ke /src/
+[[redirects]]
+  from = "/src/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Blok akses ke /publicfiles/src/
+[[redirects]]
+  from = "/publicfiles/src/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Default route
+[[redirects]]
+  from = "/*"
+  to = "/:splat"
+  status = 200

@@ -1,0 +1,20 @@
+{
+  "name": "deploy-vygit-38",
+  "version": "1.7.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["Deploy", "Cloud", "GitHub", "Netlify", "Vercel", "Nine", "NineTwelve", "Nieve", "Nueve"],
+  "author": ["NineTwelve", "Nieve"],
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.27.0",
+    "javascript-obfuscator": "^4.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "terser": "^5.44.1"
+  }
+}

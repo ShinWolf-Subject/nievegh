@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Browser</title>
+    <script src="https://kit.fontawesome.com/ac33907d14.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./dist/bundle.obf.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        grotesk: [
+                            "Space Grotesk", 
+                            "Montserrat",
+                            "Inter", 
+                            "Segoe UI", 
+                            "sans-serif"
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="src/index.css" />
+</head>
+<body class="bg-[rgba(15,23,42,0.95)] min-h-screen text-gray-100 font-grotesk">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8 text-center fade-in">
+            <div class="glass-effect rounded-2xl shadow-2xl p-8 max-w-3xl mx-auto neon-border">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fab fa-github text-5xl text-blue-400 mr-4"></i>
+                    <h1 class="text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      View Your Files
+                    </h1>
+                </div>
+                <div class="glass-light rounded-xl p-6 mt-6">
+                    <div class="flex flex-col items-center space-y-3">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-400 mb-2">Repository</p>
+                            <h2 class="text-xl font-semibold text-blue-300">
+                                <span class="font-mono bg-slate-700/50 px-3 py-1.5 rounded-lg">
+                                    ShinWolf-Subject/nine-public-sites
+                                </span>
+                            </h2>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-gray-400 mb-2">Base Path</p>
+                            <span class="font-mono bg-slate-700/50 px-3 py-1.5 rounded-lg text-purple-300">
+                                public
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <nav id="breadcrumb" class="mb-6 hidden max-w-4xl mx-auto fade-in">
+            <div class="glass-effect rounded-xl shadow-lg p-4">
+                <ol class="flex flex-wrap items-center text-sm">
+                    <li class="breadcrumb-item">
+                        <a href="#" class="text-blue-400 hover:text-blue-300 font-medium transition" data-path="">
+                            <i class="fas fa-home mr-1"></i>
+                            Home
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </nav>
+        
+        <div id="loading" class="flex justify-center items-center py-12 fade-in">
+            <div class="glass-effect rounded-xl p-6 flex items-center space-x-4">
+                <svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4" /></svg>
+                <span class="text-gray-300">Loading contents...</span>
+            </div>
+        </div>
+        
+        <div id="error-message" class="hidden glass-effect border border-red-500/30 text-red-300 px-6 py-4 rounded-xl mb-6 max-w-2xl mx-auto">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-triangle mr-3 text-red-400"></i>
+                <p id="error-text"></p>
+            </div>
+        </div>
+        
+        <div id="repo-contents" class="hidden glass-effect rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto fade-in neon-border">
+            <div class="border-b border-slate-600/50 px-6 py-4 glass-light">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-gray-200 flex items-center">
+                        <i class="fas fa-folder-open mr-2 text-yellow-400"></i>
+                        Contents
+                    </h3>
+                    <span id="item-count" class="text-sm text-gray-400 bg-slate-700/50 px-4 py-1.5 rounded-full"></span>
+                </div>
+            </div>
+            <div id="contents-list" class="divide-y divide-slate-700/30">
+            </div>
+        </div>
+        
+        <div id="file-preview-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+            <div class="glass-effect rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden transform transition-all duration-300 neon-border">
+                <div class="flex justify-between items-center px-6 py-4 border-b border-slate-600/50 glass-light">
+                    <h3 id="preview-title" class="text-lg font-semibold text-gray-200 flex items-center">
+                        <i class="fas fa-file mr-2 text-blue-400"></i>
+                    </h3>
+                    <div class="flex space-x-2">
+                        <a id="github-link" href="#" target="_blank" class="text-gray-400 hover:text-gray-200 bg-slate-700/50 p-2 rounded-lg transition" title="View on GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <button id="close-preview" class="text-gray-400 hover:text-gray-200 bg-slate-700/50 p-2 rounded-lg transition">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="preview-content" class="p-6 overflow-auto file-content bg-slate-900/30">
+                </div>
+            </div>
+        </div>
+    </div>
+  <script src="./dist/bundle.obf.js"></script>
+</body>
+</html>

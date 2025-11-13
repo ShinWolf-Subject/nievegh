@@ -1,0 +1,20 @@
+# node
+node_modules/
+
+# build/obfuscate output
+publicfiles/dist/
+publicfiles/src/
+src/
+dist/
+.build_tmp/
+
+# secrets
+.env
+
+# editor/temp
+*.log
+*.bak
+.DS_Store
+
+# optional (kalau pakai esbuild)
+.cache/
