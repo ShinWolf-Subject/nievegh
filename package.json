@@ -4,17 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "build": "node protect-js.js",
+      "vercel-build": "node protect-js.js",
+      "start": "npx http-server publicfiles -p 5000"
   },
-  "keywords": ["Deploy", "Cloud", "GitHub", "Netlify", "Vercel", "Nine", "NineTwelve", "Nieve", "Nueve"],
-  "author": ["NineTwelve", "Nieve"],
+  "keywords": [
+      "Deploy", 
+      "Cloud", 
+      "GitHub", 
+      "Netlify", 
+      "Vercel", 
+      "Nine", 
+      "NineTwelve", 
+      "Nieve", 
+      "Nueve"
+  ],
+  "author": [
+      "NineTwelve", 
+      "Nieve"
+  ],
   "license": "ISC",
   "devDependencies": {
-    "esbuild": "^0.27.0",
-    "javascript-obfuscator": "^4.1.1"
+      "esbuild": "^0.27.0",
+      "javascript-obfuscator": "^4.1.1"
   },
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "terser": "^5.44.1"
+      "dotenv": "^17.2.3",
+      "terser": "^5.44.1"
   }
 }
