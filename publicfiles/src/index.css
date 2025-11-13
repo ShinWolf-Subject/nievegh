@@ -1,0 +1,79 @@
+.folder-item:hover .folder-actions,
+.file-item:hover .file-actions {
+    opacity: 1;
+}
+
+.file-content {
+    max-height: 70vh;
+}
+
+.breadcrumb-item:not(:last-child):after {
+    content: "/";
+    margin: 0 8px;
+    color: #94a3b8;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.glass-effect {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.glass-light {
+    background: rgba(51, 65, 85, 0.5);
+    backdrop-filter: blur(12px);
+}
+
+.neon-border {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  animation: rotate 2s linear infinite;
+  margin: 50px auto;
+}
+
+.path {
+  stroke: #51a2ff;
+  stroke-linecap: round;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}

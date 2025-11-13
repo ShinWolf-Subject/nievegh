@@ -3,8 +3,6 @@ node_modules/
 
 # build/obfuscate output
 publicfiles/dist/
-publicfiles/src/
-src/
 dist/
 .build_tmp/
 
